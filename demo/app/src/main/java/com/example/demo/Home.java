@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.demo.ui.ChangePassword;
+import com.example.demo.ui.DisplayAddress;
 import com.example.demo.ui.History;
 import com.example.demo.ui.HomeFragment;
 import com.example.demo.ui.MyAddress;
@@ -26,23 +27,28 @@ import com.google.android.material.navigation.NavigationView;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 private DrawerLayout drawer;
-TextView name;
+SharedPreferences sp;
+TextView name,mail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
         Toolbar toolbar=findViewById(R.id.toolbar);
+        toolbar.setTitle("Home");
         setSupportActionBar(toolbar);
         drawer=findViewById(R.id.drawer_layout);
 
         SharedPreferences sp=getSharedPreferences("user",0);
-        String username=sp.getString("Email","");
+        String username=sp.getString("Name","");
+        String usermail=sp.getString("Email","");
 
         NavigationView navigationView=findViewById(R.id.nav_view);
         View header=navigationView.getHeaderView(0);
         name=header.findViewById(R.id.loginname);
+        mail=header.findViewById(R.id.loginmail);
         name.setText(username);
+        mail.setText(usermail);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -56,18 +62,25 @@ TextView name;
     }
     private  BottomNavigationView.OnNavigationItemSelectedListener listener=
             new BottomNavigationView.OnNavigationItemSelectedListener() {
+
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 //                    return false;
                     Fragment selectedFragment = null;
                     switch (item.getItemId()){
                         case R.id.nav_home:
+                            Toolbar t=findViewById(R.id.toolbar);
+                            t.setTitle("Home");
                             selectedFragment=new HomeFragment();
                             break;
                         case R.id.nav_mymoney:
+                            Toolbar t1=findViewById(R.id.toolbar);
+                            t1.setTitle("My Money");
                             selectedFragment=new MyMoneyFragment();
                             break;
                         case R.id.nav_history:
+                            Toolbar t2=findViewById(R.id.toolbar);
+                            t2.setTitle("History");
                             selectedFragment=new History();
                             break;
                     }
@@ -89,11 +102,19 @@ TextView name;
 //                getSupportFragmentManager().beginTransaction().replace(R.id.full_frame,new FavoritesFragment()).commit();
                 break;
             case R.id.address:
+                sp=getSharedPreferences("user",0);
+                String mail=sp.getString("Email","");
+                Boolean has= MainActivity.userData.myDoa().hasAddress(mail);
+                if(has){
+                    startActivity(new Intent(this, DisplayAddress.class));
+                }else
                 startActivity(new Intent(this, MyAddress.class));
-                break;
+                 break;
             case R.id.logout:
-
-                startActivity(new Intent(this, MainActivity.class));
+                Intent intent=new Intent(this,MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+//                startActivity(new Intent(this, MainActivity.class));
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);

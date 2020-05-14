@@ -18,7 +18,8 @@
             app:popupTheme="@style/Theme.AppCompat.Light"
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:id="@+id/toolbar"/>
+            android:id="@+id/toolbar"
+            />
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
@@ -44,7 +45,7 @@
         android:layout_height="match_parent"
         android:id="@+id/nav_view"
         android:layout_gravity="start"
-
+        app:itemTextAppearance="@style/Logout"
         app:headerLayout="@layout/drawer_header"
         app:menu="@menu/drawer_layout"/>
 </androidx.drawerlayout.widget.DrawerLayout>

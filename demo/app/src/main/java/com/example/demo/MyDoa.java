@@ -3,6 +3,7 @@ package com.example.demo;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -22,10 +23,40 @@ public interface MyDoa {
     @Query("update Users set wallet=(wallet+:amount)where mail=(:mail)")
     public void addMoney(Double amount,String mail);
 
+    @Query("update Users set wallet=(wallet+:amount) where phone=(:phone)")
+    public void sendMoney(Long phone,Double amount);
+    @Query("update Users set wallet=(wallet-:amount) where mail=(:mail)")
+    public void debitMoney(String mail,Double amount);
+
+    @Query("select password from Users where mail=(:mail)")
+    public String getPassword(String mail);
+    @Query("update Users set password=(:password) where mail=(:mail)")
+    public void updatePassword(String password,String mail);
+
+//    already registered
+    @Query("select exists (select mail from Users where mail=(:mail))")
+    public boolean hasMail(String mail);
+
+//    has phone number
+    @Query("select exists (select phone from Users where phone=(:phone))")
+    public boolean hasPhone(Long phone);
+
 //    Transactions DataBase
     @Insert
     public void addTransaction(Transactions data);
 
-    @Query("select * from Transactions")
-    public List<Transactions> getTransactions();
+    @Query("select * from Transactions where PhoneNumber=(:phone)")
+    public List<Transactions> getTransactions(Long phone);
+
+//    Address
+    @Insert
+    public void addAddress(Address address);
+    @Query("select exists (select mail from Address where mail=(:mail))")
+    public boolean hasAddress(String mail);
+    @Query("select * from Address where Mail=(:mail)")
+    public List<Address> getAddress(String mail);
+    @Update
+    public void updateAddress(Address address);
+
+
 }

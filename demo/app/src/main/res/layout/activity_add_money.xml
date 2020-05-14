@@ -14,15 +14,17 @@
         android:layout_margin="20dp"
         android:gravity="center"
         android:paddingBottom="30dp"
+        android:textSize="25dp"
         android:layout_centerInParent="true"
-        android:layout_above="@+id/amount"
+        android:layout_above="@+id/money"
         android:text="Add Money"
+        android:textColor="#8e24aa"
          />
 
     <EditText
-        android:id="@+id/amount"
+        android:id="@+id/money"
         android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="numberDecimal"
@@ -31,9 +33,11 @@
     <Button
         android:id="@+id/addButton"
         android:layout_marginTop="30dp"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
+        android:textSize="25dp"
+        android:textColor="#311b92"
         android:layout_centerInParent="true"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/amount"
+        android:layout_below="@+id/money"
         android:text="Add"/>
 </RelativeLayout>

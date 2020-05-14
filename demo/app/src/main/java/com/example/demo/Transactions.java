@@ -11,6 +11,7 @@ public class Transactions {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     private int Id;
+
     private Long PhoneNumber;
     private String Email;
     private String Description;

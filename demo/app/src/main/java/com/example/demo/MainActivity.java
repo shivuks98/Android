@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
@@ -25,6 +26,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setTitle("Login");
+
 //        startActivity(new Intent(this,Login.class));
         login=(Button) findViewById(R.id.button);
 
@@ -44,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+
     @Override
     public void onClick(View v) {
 //        startActivity(new Intent(this,Register.class));
@@ -52,17 +58,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String names=username.getText().toString();
                 String pass=password.getText().toString();
                 List<StoreData> getLogin=MainActivity.userData.myDoa().getUsers(names);
-                String upass="",umail="";
+                String upass="",umail="",uname="";
                 Long uphone=12345678910L;
                 for(StoreData data :getLogin){
                     uphone=data.getPhone();
                     umail+=data.getMail();
                     upass+=data.getPassword();
+                    uname+=data.getName();
                 }
                 SharedPreferences sp=getSharedPreferences("user",0);
                 SharedPreferences.Editor spedit=sp.edit();
                 spedit.putString("Email",umail);
                 spedit.putLong("Phone",uphone);
+                spedit.putString("Name",uname);
                 spedit.apply();
 //                Toast.makeText(this,sp.getString("Email",""),Toast.LENGTH_LONG).show();
 //                view.setText("Name:"+names+"\t"+uname+"\npass"+pass+"\t"+upass);

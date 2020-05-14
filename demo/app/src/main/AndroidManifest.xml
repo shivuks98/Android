@@ -9,17 +9,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.AddMoney"></activity>
+        <activity android:name=".ui.ChangeAddress" android:label="Change Address"></activity>
+        <activity android:name=".ui.DisplayAddress" android:label="Address" />
+        <activity android:name=".ui.AddAddress" android:label="Add Address" />
+        <activity
+            android:name=".ui.SendMoney"
+            android:label="Send Money" />
+        <activity
+            android:name=".ui.AddMoney"
+            android:label="Add Money" />
         <activity android:name=".ui.MyAddress" />
-        <activity android:name=".ui.ChangePassword" />
+        <activity
+            android:name=".ui.ChangePassword"
+            android:label="Change Password" />
         <activity
             android:name=".ui.Profile"
             android:label="Profile" />
         <activity
             android:name=".Home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Register" />
-        <activity android:name=".Login" />
+        <activity
+            android:name=".Register"
+            android:label="Register" />
+        <activity
+            android:name=".Login"
+            android:label="Login" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

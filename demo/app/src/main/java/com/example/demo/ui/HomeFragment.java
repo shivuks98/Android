@@ -1,6 +1,7 @@
 package com.example.demo.ui;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,11 +34,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.recharge:
-                Toast.makeText(getActivity(),"Recharge",Toast.LENGTH_LONG).show();
-                break;
             case R.id.sendToContact:
-                Toast.makeText(getActivity(),"send money",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getContext(),SendMoney.class));
+//                Toast.makeText(getActivity(),"send money",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.recharge:
+
+                Toast.makeText(getActivity(),"Recharge",Toast.LENGTH_LONG).show();
                 break;
         }
 
