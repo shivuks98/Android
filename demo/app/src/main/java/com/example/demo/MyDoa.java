@@ -58,5 +58,14 @@ public interface MyDoa {
     @Update
     public void updateAddress(Address address);
 
+    @Insert
+    public void addPhoto(UserPicture userPicture);
+    @Update
+    public void updatePhoto(UserPicture userPicture);
+
+    @Query("select exists (select * from UserPicture where Email=:mail)")
+    public boolean hasPhoto(String mail);
+    @Query("select * from UserPicture where Email=:mail")
+    public List<UserPicture>getPhoto(String mail);
 
 }
